@@ -52,7 +52,7 @@ variable instanceType { default = "Standard_D4s_v3" }
 variable imageName { default = "f5-bigiq-virtual-edition-byol" }
 variable product { default = "f5-big-iq" }
 variable bigiqVersion { default = "latest" }
-
+variable diskType { default = "Premium_LRS" }
 # BIGIQ Setup
 variable license1 { default = "" }
 variable license2 { default = "" }

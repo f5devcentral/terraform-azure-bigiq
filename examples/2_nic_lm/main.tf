@@ -16,6 +16,7 @@ module "bigiq" {
   dnsSearchDomains = var.dnsSearchDomains
   masterKey = var.masterKey
   timeZone = var.timeZone
+  diskType = var.diskType
   # admin
   adminSourceRange = var.adminSourceRange
   adminPassword      = var.adminAccountPassword

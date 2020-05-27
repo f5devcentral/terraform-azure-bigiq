@@ -95,7 +95,7 @@ resource "azurerm_virtual_machine" "bigiq" {
   resource_group_name          = var.resourceGroup.name
   primary_network_interface_id = azurerm_network_interface.bigiq-mgmt-nic.id
   network_interface_ids        = [azurerm_network_interface.bigiq-mgmt-nic.id, azurerm_network_interface.bigiq-discovery-nic.id]
-  vm_size                      = var.instance_type
+  vm_size                      = var.instanceType
   
   admin_ssh_key {
     username   = var.userName
@@ -111,8 +111,8 @@ resource "azurerm_virtual_machine" "bigiq" {
   storage_image_reference {
     publisher = "f5-networks"
     offer     = var.product
-    sku       = var.image_name
-    version   = var.bigip_version
+    sku       = var.imageName
+    version   = var.bigipVersion
   }
 
   storage_os_disk {
@@ -134,7 +134,7 @@ resource "azurerm_virtual_machine" "bigiq" {
   }
 
   plan {
-    name          = var.image_name
+    name          = var.imageName
     publisher     = "f5-networks"
     product       = var.product
   }
