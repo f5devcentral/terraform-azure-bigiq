@@ -1,10 +1,3 @@
-resource "random_pet" "buildSuffix" {
-  keepers = {
-    # Generate a new pet name
-    prefix = var.projectPrefix
-  }
-  separator = "-"
-}
 
 # Deploy BIGIQ Module
 module "bigiq" {
