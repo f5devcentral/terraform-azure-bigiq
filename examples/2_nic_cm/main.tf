@@ -21,7 +21,7 @@ module "bigiq" {
   adminSourceRange = var.adminSourceRange
   upassword      = var.adminAccountPassword
   uname         = var.adminAccountName
-  bigIqLicenseKey1 = var.bigIqLicenseKey1
+  bigIqLicenseKey = var.bigIqLicenseKey
   sshPublicKey = var.sshPublicKey
   #networks
   subnets = var.subnets
