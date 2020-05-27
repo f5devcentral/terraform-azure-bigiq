@@ -10,7 +10,7 @@ resource "azurerm_network_interface" "bigiq-mgmt-nic" {
     name                          = "primary"
     subnet_id                     = var.subnetMgmt.id
     private_ip_address_allocation = "Static"
-    private_ip_address            = var.bigiqmgmt
+    private_ip_address            = var.bigiqPrivateMgmtIp
     public_ip_address_id          = azurerm_public_ip.bigiqpip.id
   }
 
@@ -23,9 +23,9 @@ resource "azurerm_network_interface" "bigiq-mgmt-nic" {
     application    = var.application
   }
 }
-# Create the second network interface card for External
-resource "azurerm_network_interface" "bigiq-ext-nic" {
-  name                = "${var.prefix}bigiq-ext-nic${var.buildSuffix}"
+# Create the second network interface card for discovery
+resource "azurerm_network_interface" "bigiq-discovery-nic" {
+  name                = "${var.prefix}bigiq-discovery-nic${var.buildSuffix}"
   location            = var.resourceGroup.location
   resource_group_name = var.resourceGroup.name
   network_security_group_id = var.networkSecurityGroup.id
@@ -35,26 +35,19 @@ resource "azurerm_network_interface" "bigiq-ext-nic" {
     name                          = "primary"
     subnet_id                     = var.subnetDiscovery.id
     private_ip_address_allocation = "Static"
-    private_ip_address            = var.bigiqPrivateMgmtIp
+    private_ip_address            = var.bigiqPrivateDiscoveryIp
     primary			  = true
   }
 
-  ip_configuration {
-    name                          = "secondary"
-    subnet_id                     = var.subnetDiscovery.id
-    private_ip_address_allocation = "Static"
-    private_ip_address            = var.bigiqPrivateDiscoveryIp
-  }
-
   tags = {
-    Name           = "${var.environment}-bigiq-ext-int"
+    Name           = "${var.environment}-bigiq-discovery-int"
     environment    = var.environment
     owner          = var.owner
     group          = var.group
     costcenter     = var.costcenter
     application    = var.application
     f5_cloud_failover_label = "bigiq"
-    f5_cloud_failover_nic_map = "external"
+    f5_cloud_failover_nic_map = "discovery"
   }
 }
 # Create a Public IP for the Virtual Machines
