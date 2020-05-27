@@ -90,9 +90,6 @@ variable "regPoolKeys" {
 variable "licensePoolKeys" {
   default= "pool-key-key-key"
 }
-variable "adminPassword" {
-  description = "admin account password"
-}
 variable "sshPublicKey" {
     description = "contents of ssh public key for instance access"
 }

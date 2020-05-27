@@ -71,7 +71,7 @@ variable f5CloudLibsTag {
   default="v4.15.0"
 }
 variable masterKey {
-  default= ""
+  description = "bigiq master key"
 }
 variable regPoolKeys {
   default= "key-key-key-key"
