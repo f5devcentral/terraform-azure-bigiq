@@ -1,4 +1,7 @@
 # Azure Environment
+variable resourceGroup {
+    description = "resource group where the instance will be created"
+}
 variable prefix { 
     description = "resource prefix"
     default = "bigiq-" 

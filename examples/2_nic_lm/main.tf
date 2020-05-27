@@ -5,7 +5,7 @@ module "bigiq" {
   # setup
   prefix = var.projectPrefix
   buildSuffix = "-${random_pet.buildSuffix.id}"
-  resourceGroup = azurerm_resource_group.main.id
+  resourceGroup = azurerm_resource_group.main
   instanceType = var.instanceType
   # bigiq
   imageName = var.imageName

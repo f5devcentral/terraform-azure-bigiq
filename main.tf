@@ -2,8 +2,8 @@
 # Create the first network interface card for Management 
 resource "azurerm_network_interface" "bigiq-mgmt-nic" {
   name                      = "${var.prefix}bigiq-mgmt-nic${var.buildSuffix}"
-  location                  = azurerm_resource_group.main.location
-  resource_group_name       = azurerm_resource_group.main.name
+  location                  = var.resourceGroup.location
+  resource_group_name       = var.resourceGroup.name
   network_security_group_id = azurerm_network_security_group.main.id
 
   ip_configuration {
@@ -26,8 +26,8 @@ resource "azurerm_network_interface" "bigiq-mgmt-nic" {
 # Create the second network interface card for External
 resource "azurerm_network_interface" "bigiq-ext-nic" {
   name                = "${var.prefix}bigiq-ext-nic${var.buildSuffix}"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = var.resourceGroup.location
+  resource_group_name = var.resourceGroup.name
   network_security_group_id = azurerm_network_security_group.main.id
   depends_on          = [azurerm_lb_backend_address_pool.backend_pool]
   enable_accelerated_networking = true
@@ -61,8 +61,8 @@ resource "azurerm_network_interface" "bigiq-ext-nic" {
 # Create a Public IP for the Virtual Machines
 resource "azurerm_public_ip" "bigiqpip" {
   name                = "${var.prefix}vm01-mgmt-pip01${var.buildSuffix}"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+  location            = var.resourceGroup.location
+  resource_group_name = var.resourceGroup.name
   allocation_method   = "Dynamic"
 
   tags = {
@@ -102,8 +102,8 @@ data "template_file" "vm_onboard" {
 # create bigiq
 resource "azurerm_virtual_machine" "bigiq" {
   name                         = "${var.prefix}bigiq${var.buildSuffix}"
-  location                     = azurerm_resource_group.main.location
-  resource_group_name          = azurerm_resource_group.main.name
+  location                     = var.resourceGroup.location
+  resource_group_name          = var.resourceGroup.name
   primary_network_interface_id = azurerm_network_interface.bigiq-mgmt-nic.id
   network_interface_ids        = [azurerm_network_interface.bigiq-mgmt-nic.id, azurerm_network_interface.bigiq-int-nic.id]
   vm_size                      = var.instance_type
@@ -167,7 +167,7 @@ resource "azurerm_virtual_machine_extension" "bigiq-run-startup-cmd" {
   name                 = "${var.environment}bigiq-run-startup-cmd${var.buildSuffix}"
   depends_on           = ["azurerm_virtual_machine.bigiq"]
   location             = var.region
-  resource_group_name  = azurerm_resource_group.main.name
+  resource_group_name  = var.resourceGroup.name
   virtual_machine_name = azurerm_virtual_machine.bigiq.name
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
@@ -191,6 +191,6 @@ resource "azurerm_virtual_machine_extension" "bigiq-run-startup-cmd" {
 
 data "azurerm_public_ip" "managementPublicAddress" {
     name               = azurerm_public_ip.bigiqpip.name
-    resource_group_name = azurerm_resource_group.main.name
+    resource_group_name = var.resourceGroup.name
     depends_on          = ["azurerm_virtual_machine_extension.bigiq-run-startup-cmd"]
 }
