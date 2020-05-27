@@ -82,7 +82,7 @@ variable "f5CloudLibsTag" {
   default="v4.15.0"
 }
 variable "masterKey" {
-  default= ""
+  description = "master key for bigiq setup"
 }
 variable "regPoolKeys" {
   default= "key-key-key-key"
@@ -91,10 +91,10 @@ variable "licensePoolKeys" {
   default= "pool-key-key-key"
 }
 variable "adminPassword" {
-  default= ""
+  description = "admin account password"
 }
 variable "sshPublicKey" {
-    default = ""
+    description = "contents of ssh public key for instance access"
 }
 variable timeZone { default = "UTC" }
 

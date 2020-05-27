@@ -28,13 +28,13 @@ variable bigiqPrivateDiscoveryIp { default = "10.90.2.4" }
 variable bigiqPrivateDiscoveryIpCidr { default = "24"}
 # admin
 variable adminName {
-    default = ""
+    description = "admin account name"
 }
 variable adminPassword {
-  default= ""
+  description = "admin account password"
 }
 variable sshPublicKey {
-    default = ""
+    description = "ssh public key for instance access"
 }
 variable adminSourceRange {  default = "*" }
 # BIGIQ Image

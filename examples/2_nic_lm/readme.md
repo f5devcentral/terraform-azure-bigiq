@@ -4,6 +4,7 @@
 adminSourceRange
 adminAccountName
 adminAccountPassword
+sshPublicKey 
 
 ## Usage
 To run this example run the following commands:
