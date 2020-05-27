@@ -4,7 +4,7 @@ provider "azurerm" {
 }
 # Create a Resource Group for the new Virtual Machine
 resource "azurerm_resource_group" "main" {
-  name     = "${var.prefix}rg${var.buildSuffix}"
+  name     = "${var.prefix}rg-${random_pet.buildSuffix.id}"
   location = var.location
 }
 

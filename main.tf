@@ -165,7 +165,7 @@ resource "azurerm_virtual_machine" "bigiq" {
 # Run Startup Script
 resource "azurerm_virtual_machine_extension" "bigiq-run-startup-cmd" {
   name                 = "${var.environment}bigiq-run-startup-cmd${var.buildSuffix}"
-  depends_on           = ["azurerm_virtual_machine.bigiq"]
+  depends_on           = [azurerm_virtual_machine.bigiq]
   location             = var.region
   resource_group_name  = var.resourceGroup.name
   virtual_machine_name = azurerm_virtual_machine.bigiq.name
@@ -192,5 +192,5 @@ resource "azurerm_virtual_machine_extension" "bigiq-run-startup-cmd" {
 data "azurerm_public_ip" "managementPublicAddress" {
     name               = azurerm_public_ip.bigiqpip.name
     resource_group_name = var.resourceGroup.name
-    depends_on          = ["azurerm_virtual_machine_extension.bigiq-run-startup-cmd"]
+    depends_on          = [azurerm_virtual_machine_extension.bigiq-run-startup-cmd]
 }

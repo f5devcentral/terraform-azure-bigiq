@@ -1,4 +1,4 @@
-variable "bigIqLicenseKey1" {
+variable "bigIqLicenseKey" {
   description = "big-iq-key-key-key-byol"
   default = ""
 }
@@ -43,8 +43,8 @@ variable "subnets" {
     "subnet2" = "10.90.2.0/24"
   }
 }
-variable bigiqMgmtIp { default = "10.90.1.4" }
-variable bigiqDiscoveryIp { default = "10.90.2.4" }
+variable bigiqPrivateMgmtIp { default = "10.90.1.4" }
+variable bigiqPrivateDiscoveryIp { default = "10.90.2.4" }
 
 # BIGIQ Image
 variable instanceType { default = "Standard_D4s_v3" }
