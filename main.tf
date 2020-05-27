@@ -131,6 +131,11 @@ resource "azurerm_virtual_machine" "bigiq" {
 
   os_profile_linux_config {
     disable_password_authentication = false
+    ssh_keys {
+        #NOTE: Due to a limitation in the Azure VM Agent the only allowed path is /home/{username}/.ssh/authorized_keys.
+        path  = "/home/${var.adminName}/.ssh/authorized_keys"
+        key_data = var.sshPublicKey
+    }
   }
 
   plan {
