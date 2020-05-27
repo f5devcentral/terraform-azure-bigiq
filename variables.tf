@@ -35,12 +35,11 @@ variable bigipVersion { default = "latest" }
 # BIGIQ Setup
 variable license1 { default = "" }
 variable license2 { default = "" }
-variable host1Name { default = "f5vm01" }
-variable host2Name { default = "f5vm02" }
+variable hostName { default = "bigiq" }
 variable dnsServers { default = "8.8.8.8" }
 variable dnsSearchDomains { default = "example.com" }
-variable ntpServer { default = "0.us.pool.ntp.org" }
-variable timezone { default = "UTC" }
+variable ntpServers { default = "0.us.pool.ntp.org" }
+variable timeZone { default = "UTC" }
 variable onboard_log { default = "/var/log/startup-script.log" }
 #
 variable "deploymentId" {
