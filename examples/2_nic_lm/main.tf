@@ -9,7 +9,7 @@ module "bigiq" {
   instanceType = var.instanceType
   # bigiq
   imageName = var.imageName
-  bigipVersion = var.bigiqVersion
+  bigiqVersion = var.bigiqVersion
   hostName = var.host1Name
   dnsServers = var.dnsServers
   ntpServers = var.ntpServers

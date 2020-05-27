@@ -108,7 +108,7 @@ resource "azurerm_virtual_machine" "bigiq" {
     publisher = "f5-networks"
     offer     = var.product
     sku       = var.imageName
-    version   = var.bigipVersion
+    version   = var.bigiqVersion
   }
 
   storage_os_disk {
