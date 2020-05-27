@@ -1,9 +1,6 @@
 variable "bigIqLicenseKey1" {
   description = "big-iq-key-key-key-byol"
 }
-variable "subscriptionID" {
-  default= "Azure-subscriptionID"
-}
 variable "adminAccountName" {
   description = "BIG-IQ admin account name ex: xadmin"
 }
@@ -37,7 +34,6 @@ variable upassword { default = "" }
 variable location { default = "eastus2" }
 variable region { default = "East US 2" }
 
-variable "adminSourceRange" {  default = "*" }
 
 
 # NETWORK
@@ -74,7 +70,7 @@ variable "deploymentId" {
   
 }
 variable "subscriptionID" {
-  default= "my-azure-subscription-id"
+  description = "my-azure-subscription-id"
 }
 variable "allowUsageAnalytics" {
     default= false
@@ -107,10 +103,6 @@ variable "sshPublicKey" {
 variable timeZone { default = "UTC" }
 
 variable ntpServer { default = "0.us.pool.ntp.org" }
-
-variable "bigIqLicenseKey1" {
-  default= "big-iq-key-key-key"
-}
 
 # adminusername
 # adminpassword
