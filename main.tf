@@ -94,9 +94,8 @@ resource "azurerm_virtual_machine" "bigiq" {
   location                     = var.resourceGroup.location
   resource_group_name          = var.resourceGroup.name
   primary_network_interface_id = azurerm_network_interface.bigiq-mgmt-nic.id
-  network_interface_ids        = [azurerm_network_interface.bigiq-mgmt-nic.id, azurerm_network_interface.bigiq-int-nic.id]
+  network_interface_ids        = [azurerm_network_interface.bigiq-mgmt-nic.id, azurerm_network_interface.bigiq-discovery-nic.id]
   vm_size                      = var.instance_type
-  availability_set_id          = azurerm_availability_set.avset.id
   
   admin_ssh_key {
     username   = var.userName
