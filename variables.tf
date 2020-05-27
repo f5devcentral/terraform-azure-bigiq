@@ -9,13 +9,8 @@ variable prefix {
 variable "buildSuffix" {
   description = "resource suffix"
 }
-variable adminName { default = "" }
-variable adminPassword { default = "" }
 variable location { default = "eastus2" }
 variable region { default = "East US 2" }
-
-variable "adminSourceRange" {  default = "*" }
-
 
 # NETWORK
 variable networkSecurityGroup {
@@ -31,7 +26,17 @@ variable subnetDiscovery {
 variable bigiqPrivateMgmtIp { default = "10.90.1.4" }
 variable bigiqPrivateDiscoveryIp { default = "10.90.2.4" }
 variable bigiqPrivateDiscoveryIpCidr { default = "24"}
-
+# admin
+variable adminName {
+    default = ""
+}
+variable adminPassword {
+  default= ""
+}
+variable sshPublicKey {
+    default = ""
+}
+variable adminSourceRange {  default = "*" }
 # BIGIQ Image
 variable instanceType { default = "Standard_D4s_v3" }
 variable imageName { default = "f5-bigiq-virtual-edition-byol" }
@@ -48,39 +53,32 @@ variable ntpServers { default = "0.us.pool.ntp.org" }
 variable timeZone { default = "UTC" }
 variable onboardLog { default = "/var/log/startup-script.log" }
 #
-variable "deploymentId" {
+variable deploymentId {
     default= "bigiq-test"
   
 }
-variable "allowUsageAnalytics" {
+variable allowUsageAnalytics {
     default= false
   
 }
-variable "f5CloudLibsAzureTag" {
+variable f5CloudLibsAzureTag {
   description="release from f5-cloud-libs https://github.com/F5Networks/f5-cloud-libs-azure/releases"
   default="v2.12.0"
 }
-variable "f5CloudLibsTag" {
+variable f5CloudLibsTag {
   description="release from f5-cloud-libs https://github.com/F5Networks/f5-cloud-libs/releases"
   default="v4.15.0"
 }
-variable "masterKey" {
+variable masterKey {
   default= ""
 }
-variable "regPoolKeys" {
+variable regPoolKeys {
   default= "key-key-key-key"
 }
-variable "licensePoolKeys" {
+variable licensePoolKeys {
   default= "pool-key-key-key"
 }
-variable "adminPassword" {
-  default= ""
-}
-variable "sshPublicKey" {
-    default = ""
-}
-
-variable "bigIqLicenseKey" {
+variable bigIqLicenseKey {
   description= "big-iq-key-key-key"
   default = ""
 }
