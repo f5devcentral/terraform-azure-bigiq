@@ -4,11 +4,11 @@ resource "azurerm_network_interface" "bigiq-mgmt-nic" {
   name                      = "${var.prefix}bigiq-mgmt-nic${var.buildSuffix}"
   location                  = var.resourceGroup.location
   resource_group_name       = var.resourceGroup.name
-  network_security_group_id = azurerm_network_security_group.main.id
+  network_security_group_id = var.networkSecurityGroup.id
 
   ip_configuration {
     name                          = "primary"
-    subnet_id                     = azurerm_subnet.mgmt.id
+    subnet_id                     = var.subnetMgmt.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.bigiqmgmt
     public_ip_address_id          = azurerm_public_ip.f5vmpip01.id
@@ -28,13 +28,12 @@ resource "azurerm_network_interface" "bigiq-ext-nic" {
   name                = "${var.prefix}bigiq-ext-nic${var.buildSuffix}"
   location            = var.resourceGroup.location
   resource_group_name = var.resourceGroup.name
-  network_security_group_id = azurerm_network_security_group.main.id
-  depends_on          = [azurerm_lb_backend_address_pool.backend_pool]
+  network_security_group_id = var.networkSecurityGroup.id
   enable_accelerated_networking = true
 
   ip_configuration {
     name                          = "primary"
-    subnet_id                     = azurerm_subnet.External.id
+    subnet_id                     = var.subnetDiscovery.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.f5vm01ext
     primary			  = true
@@ -42,7 +41,7 @@ resource "azurerm_network_interface" "bigiq-ext-nic" {
 
   ip_configuration {
     name                          = "secondary"
-    subnet_id                     = azurerm_subnet.External.id
+    subnet_id                     = var.subnetDiscovery.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.f5vm01ext_sec
   }
@@ -74,15 +73,14 @@ data "template_file" "vm_onboard" {
   template = "${file("${path.module}/onboard.sh.tpl")}"
 
   vars = {
-    uname        	      = var.adminName
-    upassword        	  = var.adminPassword
-    onboard_log		      = var.onboardLog
+    adminName      	      = var.adminName
+    adminPassword         = var.adminPassword
+    onboardLog		      = var.onboardLog
     bigIqLicenseKey      = var.bigIqLicenseKey
-    ntpServer             = var.ntpServer
+    ntpServers             = var.ntpServers
     timeZone              = var.timeZone
     licensePoolKeys       = var.licensePoolKeys
     regPoolKeys           = var.regPoolKeys
-    adminPassword         = var.adminPassword
     masterKey             = var.masterKey
     f5CloudLibsTag        = var.f5CloudLibsTag
     f5CloudLibsAzureTag   = var.f5CloudLibsAzureTag
@@ -90,12 +88,11 @@ data "template_file" "vm_onboard" {
     allowUsageAnalytics   = var.allowUsageAnalytics
     location              = var.location
     deploymentId          =  var.deploymentId
-    hostName1           =  "${var.hostName}.${var.domain}"
-    hostName2              = "${var.host2_name}.example.com"
-    discoveryAddressSelfip = "${var.discoveryIp}/${var.discoveryIpCidr}"
-    discoveryAddress      = var.f5vm01ext
-    dnsSearchDomains       = var.dns_search_domains
-    dnsServers              = var.dns_servers
+    hostName           =  "${var.hostName}.${var.dnsSearchDomains}"
+    discoveryAddressSelfip = "${var.bigiqPrivateDiscoveryIp}/${var.discoveryIpCidr}"
+    discoveryAddress      = var.bigiqPrivateDiscoveryIp
+    dnsSearchDomains       = var.dnsSearchDomains
+    dnsServers              = var.dnsServers
   }
 }
 

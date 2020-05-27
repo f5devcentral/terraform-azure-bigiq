@@ -2,7 +2,7 @@
 # require jq
 #
 # logging
-LOG_FILE=${onboard_log}
+LOG_FILE=${onboardLog}
 if [ ! -e $LOG_FILE ]
 then
      touch $LOG_FILE
@@ -57,8 +57,8 @@ done
 waitMcpd
 # create admin account and password
 echo "create admin account"
-admin_username='${uname}'
-admin_password='${upassword}'
+admin_username='${adminName}'
+admin_password='${adminPassword}'
 
 tmsh create auth user $admin_username password $admin_password shell bash partition-access add { all-partitions { role admin } };
 tmsh modify auth user $admin_username shell bash partition-access add { all-partitions { role admin } };
@@ -77,11 +77,9 @@ echo " admin account changed"
 #
 # vars
 #
-uname="${uname}"
-upassword="${upassword}"
 onboard_log="${onboard_log}"
 bigIqLicenseKey="${bigIqLicenseKey}"
-ntpServers="${ntpServer}"
+ntpServers="${ntpServers}"
 ntpTimeZone="${timeZone}"
 licensePoolKeys="${licensePoolKeys}"
 regPoolKeys="${regPoolKeys}"

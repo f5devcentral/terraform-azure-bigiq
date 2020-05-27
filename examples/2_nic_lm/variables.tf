@@ -45,6 +45,7 @@ variable "subnets" {
 }
 variable bigiqPrivateMgmtIp { default = "10.90.1.4" }
 variable bigiqPrivateDiscoveryIp { default = "10.90.2.4" }
+variable bigiqPrivateDiscoveryIpCidr { default ="24" }
 
 # BIGIQ Image
 variable instanceType { default = "Standard_D4s_v3" }

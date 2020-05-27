@@ -9,8 +9,8 @@ variable prefix {
 variable "buildSuffix" {
   description = "resource suffix"
 }
-variable uname { default = "" }
-variable upassword { default = "" }
+variable adminName { default = "" }
+variable adminPassword { default = "" }
 variable location { default = "eastus2" }
 variable region { default = "East US 2" }
 
@@ -18,16 +18,19 @@ variable "adminSourceRange" {  default = "*" }
 
 
 # NETWORK
+variable networkSecurityGroup {
+    description = "main network security group"
+}
 variable cidr { default = "10.90.0.0/16" }
-variable "subnets" {
-  type = map
-  default = {
-    "subnet1" = "10.90.1.0/24"
-    "subnet2" = "10.90.2.0/24"
-  }
+variable subnetMgmt {
+    description = "management subnet"
+}
+variable subnetDiscovery {
+    description = "discovery subnet"
 }
 variable bigiqPrivateMgmtIp { default = "10.90.1.4" }
 variable bigiqPrivateDiscoveryIp { default = "10.90.2.4" }
+variable bigiqPrivateDiscoveryIpCidr { default = "24"}
 
 # BIGIQ Image
 variable instanceType { default = "Standard_D4s_v3" }
@@ -43,7 +46,7 @@ variable dnsServers { default = "8.8.8.8" }
 variable dnsSearchDomains { default = "example.com" }
 variable ntpServers { default = "0.us.pool.ntp.org" }
 variable timeZone { default = "UTC" }
-variable onboard_log { default = "/var/log/startup-script.log" }
+variable onboardLog { default = "/var/log/startup-script.log" }
 #
 variable "deploymentId" {
     default= "bigiq-test"
@@ -53,7 +56,6 @@ variable "allowUsageAnalytics" {
     default= false
   
 }
-variable intSubnetPrivateAddress { default = "10.90.3.4"}
 variable "f5CloudLibsAzureTag" {
   description="release from f5-cloud-libs https://github.com/F5Networks/f5-cloud-libs-azure/releases"
   default="v2.12.0"

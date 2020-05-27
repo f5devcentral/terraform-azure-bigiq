@@ -23,8 +23,11 @@ module "bigiq" {
   bigIqLicenseKey = var.bigIqLicenseKey
   sshPublicKey = var.sshPublicKey
   #networks
-  subnets = var.subnets
+  subnetMgmt = var.subnetMgmt
+  subnetDiscovery = var.subnetDiscovery
+  bigiqPrivateDiscoveryIpCidr = var.bigiqPrivateDiscoveryIpCidr
   cidr = var.cidr
   bigiqPrivateMgmtIp = var.bigiqPrivateMgmtIp
   bigiqPrivateDiscoveryIp = var.bigiqPrivateDiscoveryIp
+  networkSecurityGroup = var.networkSecurityGroup
 }

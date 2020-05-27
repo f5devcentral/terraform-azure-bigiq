@@ -1,6 +1,6 @@
 # Create a Network Security Group with some rules
 resource "azurerm_network_security_group" "main" {
-  name                = "${var.prefix}nsg${var.buildSuffix}"
+  name                = "${var.prefix}nsg-${random_pet.buildSuffix.id}"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   # https://support.f5.com/csp/article/K15612
