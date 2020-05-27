@@ -97,10 +97,6 @@ resource "azurerm_virtual_machine" "bigiq" {
   network_interface_ids        = [azurerm_network_interface.bigiq-mgmt-nic.id, azurerm_network_interface.bigiq-discovery-nic.id]
   vm_size                      = var.instanceType
   
-  admin_ssh_key {
-    username   = var.userName
-    public_key = var.sshPublicKey
-  }
   # Uncomment this line to delete the OS disk automatically when deleting the VM
    delete_os_disk_on_termination = true
 
