@@ -1,5 +1,6 @@
-variable "bigIqLicenseKey1" {
+variable "bigIqLicenseKey" {
   description = "big-iq-key-key-key-byol"
+  default = ""
 }
 variable "adminAccountName" {
   description = "BIG-IQ admin account name ex: xadmin"
@@ -26,37 +27,38 @@ variable prefix {
     description = "resource prefix"
     default = "bigiq-" 
 }
-variable uname { default = "" }
-variable upassword { default = "" }
 variable location { default = "eastus2" }
 variable region { default = "East US 2" }
+
+
 
 # NETWORK
 variable cidr { default = "10.90.0.0/16" }
 variable "subnets" {
-  type = "map"
+  type = map
   default = {
     "subnet1" = "10.90.1.0/24"
     "subnet2" = "10.90.2.0/24"
   }
 }
-variable bigiqmgmt { default = "10.90.1.4" }
-variable bigiqext { default = "10.90.2.4" }
+variable bigiqPrivateMgmtIp { default = "10.90.1.4" }
+variable bigiqPrivateDiscoveryIp { default = "10.90.2.4" }
+variable bigiqPrivateDiscoveryIpCidr { default ="24" }
 
 # BIGIQ Image
-variable instance_type { default = "Standard_D4s_v3" }
-variable image_name { default = "f5-bigiq-virtual-edition-byol" }
+variable instanceType { default = "Standard_D4s_v3" }
+variable imageName { default = "f5-bigiq-virtual-edition-byol" }
 variable product { default = "f5-big-iq" }
-variable bigip_version { default = "latest" }
-
+variable bigiqVersion { default = "latest" }
+variable diskType { default = "Premium_LRS" }
 # BIGIQ Setup
 variable license1 { default = "" }
 variable license2 { default = "" }
-variable host1_name { default = "f5vm01" }
-variable host2_name { default = "f5vm02" }
-variable dns_servers { default = "8.8.8.8" }
-variable dns_search_domains { default = "example.com" }
-variable ntp_server { default = "0.us.pool.ntp.org" }
+variable host1Name { default = "bigiq01" }
+variable host2Name { default = "bigiq02" }
+variable dnsServers { default = "8.8.8.8" }
+variable dnsSearchDomains { default = "example.com" }
+variable ntpServers { default = "0.us.pool.ntp.org" }
 variable timezone { default = "UTC" }
 variable onboard_log { default = "/var/log/startup-script.log" }
 #
@@ -78,7 +80,7 @@ variable "f5CloudLibsTag" {
   default="v4.15.0"
 }
 variable "masterKey" {
-  default= ""
+  description = "master key for bigiq setup"
 }
 variable "regPoolKeys" {
   default= "key-key-key-key"
@@ -86,16 +88,12 @@ variable "regPoolKeys" {
 variable "licensePoolKeys" {
   default= "pool-key-key-key"
 }
-variable "adminPassword" {
-  default= ""
-}
 variable "sshPublicKey" {
-    default = ""
+    description = "contents of ssh public key for instance access"
 }
 variable timeZone { default = "UTC" }
 
 variable ntpServer { default = "0.us.pool.ntp.org" }
-
 
 # adminusername
 # adminpassword

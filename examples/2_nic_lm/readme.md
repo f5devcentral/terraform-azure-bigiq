@@ -1,11 +1,17 @@
 # 2 nic licence manager
 
-# variables
+## variables
+### bigiq
 adminSourceRange
 adminAccountName
 adminAccountPassword
-sshPublicKey 
-masterKey
+sshPublicKey
+masterKey 
+### azure
+ARM_CLIENT_ID
+ARM_CLIENT_SECRET
+ARM_SUBSCRIPTION_ID
+ARM_TENANT_ID
 
 ## Usage
 To run this example run the following commands:

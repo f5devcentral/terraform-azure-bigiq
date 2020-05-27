@@ -5,8 +5,7 @@ module "bigiq" {
   # setup
   prefix = var.projectPrefix
   buildSuffix = "-${random_pet.buildSuffix.id}"
-  subscriptionID = var.subscriptionID
-  resourceGroup = azurerm_resource_group.main.id
+  resourceGroup = azurerm_resource_group.main
   instanceType = var.instanceType
   # bigiq
   imageName = var.imageName
@@ -17,15 +16,19 @@ module "bigiq" {
   dnsSearchDomains = var.dnsSearchDomains
   masterKey = var.masterKey
   timeZone = var.timeZone
+  diskType = var.diskType
   # admin
   adminSourceRange = var.adminSourceRange
-  upassword      = var.adminAccountPassword
-  uname         = var.adminAccountName
+  adminPassword      = var.adminAccountPassword
+  adminName        = var.adminAccountName
   bigIqLicenseKey = var.bigIqLicenseKey
   sshPublicKey = var.sshPublicKey
   #networks
-  subnets = var.subnets
+  subnetMgmt = azurerm_subnet.mgmt
+  subnetDiscovery = azurerm_subnet.discovery
+  bigiqPrivateDiscoveryIpCidr = var.bigiqPrivateDiscoveryIpCidr
   cidr = var.cidr
-  bigiqMgmtIp = var.bigiqMgmtIp
-  bigiqDiscoveryIp = var.bigiqDiscoveryIp
+  bigiqPrivateMgmtIp = var.bigiqPrivateMgmtIp
+  bigiqPrivateDiscoveryIp = var.bigiqPrivateDiscoveryIp
+  networkSecurityGroup = azurerm_network_security_group.main
 }

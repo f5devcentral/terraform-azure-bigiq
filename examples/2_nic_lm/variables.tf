@@ -27,8 +27,6 @@ variable prefix {
     description = "resource prefix"
     default = "bigiq-" 
 }
-variable uname { default = "" }
-variable upassword { default = "" }
 variable location { default = "eastus2" }
 variable region { default = "East US 2" }
 
