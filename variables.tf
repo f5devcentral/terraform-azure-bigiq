@@ -17,7 +17,7 @@ variable "adminSourceRange" {  default = "*" }
 # NETWORK
 variable cidr { default = "10.90.0.0/16" }
 variable "subnets" {
-  type = "map"
+  type = map
   default = {
     "subnet1" = "10.90.1.0/24"
     "subnet2" = "10.90.2.0/24"
@@ -75,9 +75,6 @@ variable "adminPassword" {
 variable "sshPublicKey" {
     default = ""
 }
-variable timeZone { default = "UTC" }
-
-variable ntpServer { default = "0.us.pool.ntp.org" }
 
 variable "bigIqLicenseKey" {
   description= "big-iq-key-key-key"

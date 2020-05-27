@@ -37,7 +37,7 @@ variable region { default = "East US 2" }
 # NETWORK
 variable cidr { default = "10.90.0.0/16" }
 variable "subnets" {
-  type = "map"
+  type = map
   default = {
     "subnet1" = "10.90.1.0/24"
     "subnet2" = "10.90.2.0/24"
