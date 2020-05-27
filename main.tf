@@ -84,12 +84,11 @@ data "template_file" "vm_onboard" {
     masterKey             = var.masterKey
     f5CloudLibsTag        = var.f5CloudLibsTag
     f5CloudLibsAzureTag   = var.f5CloudLibsAzureTag
-    intSubnetPrivateAddress = var.intSubnetPrivateAddress
     allowUsageAnalytics   = var.allowUsageAnalytics
     location              = var.location
     deploymentId          =  var.deploymentId
     hostName           =  "${var.hostName}.${var.dnsSearchDomains}"
-    discoveryAddressSelfip = "${var.bigiqPrivateDiscoveryIp}/${var.discoveryIpCidr}"
+    discoveryAddressSelfip = "${var.bigiqPrivateDiscoveryIp}/${var.bigiqPrivateDiscoveryIpCidr}"
     discoveryAddress      = var.bigiqPrivateDiscoveryIp
     dnsSearchDomains       = var.dnsSearchDomains
     dnsServers              = var.dnsServers
