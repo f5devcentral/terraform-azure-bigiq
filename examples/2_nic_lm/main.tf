@@ -18,8 +18,8 @@ module "bigiq" {
   timeZone = var.timeZone
   # admin
   adminSourceRange = var.adminSourceRange
-  upassword      = var.adminAccountPassword
-  uname         = var.adminAccountName
+  adminPassword      = var.adminAccountPassword
+  adminName        = var.adminAccountName
   bigIqLicenseKey = var.bigIqLicenseKey
   sshPublicKey = var.sshPublicKey
   #networks
