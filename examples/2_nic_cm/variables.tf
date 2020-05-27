@@ -101,6 +101,9 @@ variable "licensePoolKeys" {
 variable "adminPassword" {
   default= ""
 }
+variable "sshPublicKey" {
+    default = ""
+}
 variable timeZone { default = "UTC" }
 
 variable ntpServer { default = "0.us.pool.ntp.org" }

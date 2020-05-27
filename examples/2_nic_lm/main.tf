@@ -1,11 +1,8 @@
 resource "random_pet" "buildSuffix" {
   keepers = {
-    # Generate a new pet name each time we switch to a new AMI id
-    #ami_id = "${var.ami_id}"
-    prefix = "${var.projectPrefix}"
+    # Generate a new pet name
+    prefix = var.projectPrefix
   }
-  #length = ""
-  #prefix = "${var.projectPrefix}"
   separator = "-"
 }
 
@@ -13,29 +10,29 @@ resource "random_pet" "buildSuffix" {
 module "bigiq" {
   source = "github.com/vinnie357/terraform-azure-bigiq?ref=master"
   # setup
-  prefix = "${var.projectPrefix}"
+  prefix = var.projectPrefix
   buildSuffix = "-${random_pet.buildSuffix.id}"
-  subscriptionID = "${var.subscriptionID}"
-  resourceGroup = "${azurerm_resource_group.main.id}"
-  instanceType =
+  subscriptionID = var.subscriptionID
+  resourceGroup = azurerm_resource_group.main.id
+  instanceType = var.instanceType
   # bigiq
-  imageName =
-  product =
-  bigipVersion =
-  hostName =
-  dnsServers =
-  ntpServers =
-  dnsSearchDomains =
-  masterKey =
-  timeZone =
+  imageName = var.imageName
+  bigipVersion = var.bigiqVersion
+  hostName = var.host1Name
+  dnsServers = var.dnsServers
+  ntpServers = var.ntpServers
+  dnsSearchDomains = var.dnsSearchDomains
+  masterKey = var.masterKey
+  timeZone = var.timeZone
   # admin
-  adminSourceRange = "${var.adminSourceRange}"
-  upassword      = "${var.adminAccountPassword}"
-  uname         = "${var.adminAccountName}"
-  bigIqLicenseKey1 = "${var.bigIqLicenseKey1}"
+  adminSourceRange = var.adminSourceRange
+  upassword      = var.adminAccountPassword
+  uname         = var.adminAccountName
+  bigIqLicenseKey1 = var.bigIqLicenseKey1
+  sshPublicKey = var.sshPublicKey
   #networks
-  subnets =
-  cidr =
-  bigiqMgmtIp =
-  bigiqExtIp =
+  subnets = var.subnets
+  cidr = var.cidr
+  bigiqMgmtIp = var.bigiqMgmtIp
+  bigiqDiscoveryIp = var.bigiqDiscoveryIp
 }

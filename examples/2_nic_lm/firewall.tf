@@ -1,8 +1,8 @@
 # Create a Network Security Group with some rules
 resource "azurerm_network_security_group" "main" {
   name                = "${var.prefix}nsg${var.buildSuffix}"
-  location            = "${azurerm_resource_group.main.location}"
-  resource_group_name = "${azurerm_resource_group.main.name}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
   # https://support.f5.com/csp/article/K15612
 security_rule {
     name                       = "allow_admin_SSH"
@@ -13,7 +13,7 @@ security_rule {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefix      = "${var.adminSourceRange}"
+    source_address_prefix      = var.adminSourceRange
     destination_address_prefix = "*"
   }
 
@@ -26,7 +26,7 @@ security_rule {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "443"
-    source_address_prefix      = "${var.adminSourceRange}"
+    source_address_prefix      = var.adminSourceRange
     destination_address_prefix = "*"
   }
   security_rule {
@@ -148,10 +148,10 @@ security_rule {
 
   tags = {
     Name           = "${var.environment}-bigiq-sg"
-    environment    = "${var.environment}"
-    owner          = "${var.owner}"
-    group          = "${var.group}"
-    costcenter     = "${var.costcenter}"
-    application    = "${var.application}"
+    environment    = var.environment
+    owner          = var.owner
+    group          = var.group
+    costcenter     = var.costcenter
+    application    = var.application
   }
 }

@@ -75,6 +75,9 @@ variable "licensePoolKeys" {
 variable "adminPassword" {
   default= ""
 }
+variable "sshPublicKey" {
+    default = ""
+}
 variable timeZone { default = "UTC" }
 
 variable ntpServer { default = "0.us.pool.ntp.org" }
@@ -115,7 +118,7 @@ variable "bigIqLicenseKey1" {
 
 # TAGS
 variable purpose { default = "public" }
-variable environment { default = "f5env" } #ex. dev/staging/prod
+variable environment { default = "dev" } #ex. dev/staging/prod
 variable owner { default = "f5owner" }
 variable group { default = "f5group" }
 variable costcenter { default = "f5costcenter" }
