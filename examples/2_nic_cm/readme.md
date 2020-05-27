@@ -1,5 +1,9 @@
 # 2 nic central manager
 
+# variables
+adminSourceRange
+adminAccountName
+adminAccountPassword
 
 ## Usage
 To run this example run the following commands:

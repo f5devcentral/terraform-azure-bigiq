@@ -1,5 +1,6 @@
 variable "bigIqLicenseKey1" {
   description = "big-iq-key-key-key-byol"
+  default = ""
 }
 variable "adminAccountName" {
   description = "BIG-IQ admin account name ex: xadmin"
@@ -25,9 +26,6 @@ variable "projectPrefix" {
 variable prefix { 
     description = "resource prefix"
     default = "bigiq-" 
-}
-variable "buildSuffix" {
-  description = "resource suffix"
 }
 variable uname { default = "" }
 variable upassword { default = "" }
@@ -68,9 +66,6 @@ variable onboard_log { default = "/var/log/startup-script.log" }
 variable "deploymentId" {
     default= "bigiq-test"
   
-}
-variable "subscriptionID" {
-  description = "my-azure-subscription-id"
 }
 variable "allowUsageAnalytics" {
     default= false

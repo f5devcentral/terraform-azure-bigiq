@@ -26,9 +26,6 @@ variable prefix {
     description = "resource prefix"
     default = "bigiq-" 
 }
-variable "buildSuffix" {
-  description = "resource suffix"
-}
 variable uname { default = "" }
 variable upassword { default = "" }
 variable location { default = "eastus2" }
@@ -66,9 +63,6 @@ variable onboard_log { default = "/var/log/startup-script.log" }
 variable "deploymentId" {
     default= "bigiq-test"
   
-}
-variable "subscriptionID" {
-  description= "my-azure-subscription-id"
 }
 variable "allowUsageAnalytics" {
     default= false

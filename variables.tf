@@ -47,9 +47,6 @@ variable "deploymentId" {
     default= "bigiq-test"
   
 }
-variable "subscriptionID" {
-  default= "my-azure-subscription-id"
-}
 variable "allowUsageAnalytics" {
     default= false
   
@@ -82,8 +79,9 @@ variable timeZone { default = "UTC" }
 
 variable ntpServer { default = "0.us.pool.ntp.org" }
 
-variable "bigIqLicenseKey1" {
-  default= "big-iq-key-key-key"
+variable "bigIqLicenseKey" {
+  description= "big-iq-key-key-key"
+  default = ""
 }
 
 # adminusername

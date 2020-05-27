@@ -77,7 +77,7 @@ data "template_file" "vm_onboard" {
     uname        	      = var.adminName
     upassword        	  = var.adminPassword
     onboard_log		      = var.onboardLog
-    bigIqLicenseKey1      = var.bigIqLicenseKey1
+    bigIqLicenseKey      = var.bigIqLicenseKey
     ntpServer             = var.ntpServer
     timeZone              = var.timeZone
     licensePoolKeys       = var.licensePoolKeys
@@ -89,7 +89,6 @@ data "template_file" "vm_onboard" {
     intSubnetPrivateAddress = var.intSubnetPrivateAddress
     allowUsageAnalytics   = var.allowUsageAnalytics
     location              = var.location
-    subscriptionID        = var.subscriptionId
     deploymentId          =  var.deploymentId
     hostName1           =  "${var.hostName}.${var.domain}"
     hostName2              = "${var.host2_name}.example.com"

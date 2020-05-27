@@ -80,7 +80,7 @@ echo " admin account changed"
 uname="${uname}"
 upassword="${upassword}"
 onboard_log="${onboard_log}"
-bigIqLicenseKey1="${bigIqLicenseKey1}"
+bigIqLicenseKey="${bigIqLicenseKey}"
 ntpServers="${ntpServer}"
 ntpTimeZone="${timeZone}"
 licensePoolKeys="${licensePoolKeys}"
@@ -92,7 +92,6 @@ f5CloudLibsAzureTag="${f5CloudLibsAzureTag}"
 intSubnetPrivateAddress="${intSubnetPrivateAddress}"
 allowUsageAnalytics="${allowUsageAnalytics}"
 location="${location}"
-subscriptionID="${subscriptionID}"
 deploymentId="${deploymentId}"
 dnsSearchDomains="${dnsSearchDomains}"
 dnsServers="${dnsServers}"
@@ -267,8 +266,8 @@ getEulaPayload () {
 if [[ "$(checkVersion)" == "7" ]]; then
 eulaPayload7=$(cat -<<EOF
   {
-  "baseRegKey": "${ bigIqLicenseKey1 }",
-  "dossier: "$(getDossier ${ bigIqLicenseKey1 })",
+  "baseRegKey": "${ bigIqLicenseKey }",
+  "dossier: "$(getDossier ${ bigIqLicenseKey })",
   "eulaText": $(curl -sk --header "$(setToken)" --url $localHost$mgmt_port$licenseUrl | jq .eulaText)
   }
 
@@ -278,7 +277,7 @@ echo "$eulaPayload7"
 else 
 eulaPayload6=$(cat -<<EOF
   {
-  "baseRegKey": "${ bigIqLicenseKey1 }",
+  "baseRegKey": "${ bigIqLicenseKey }",
   "addOnKeys": [],
   "activationMethod": "AUTOMATIC",
   "eulaText": $(curl -sk --header "$(setToken)" --url $localHost$mgmt_port$licenseUrl | jq .eulaText)
@@ -529,7 +528,7 @@ EOF
 )
 
 #license
-if [ "$bigIqLicenseKey1" == "" ]; then
+if [ "$bigIqLicenseKey" == "" ]; then
 licensePayload=$(cat -<<EOF
   {
       "licenseText": "skipLicense:true"
@@ -539,7 +538,7 @@ EOF
 else
 licensePayload=$(cat -<<EOF
   {
-      "baseRegKey": "${ bigIqLicenseKey1 }",
+      "baseRegKey": "${ bigIqLicenseKey }",
       "addOnKeys": [],
       "activationMethod": "AUTOMATIC"
   }
@@ -640,7 +639,7 @@ echo " version $(checkVersion)"
 #
 echo "license bigiq"
 # send license payload
-if [ "$bigIqLicenseKey1" == "" ]; then
+if [ "$bigIqLicenseKey" == "" ]; then
     echo "bigiq-license manager"
     licenseRegistration "$licensePayload"
 else
@@ -655,7 +654,7 @@ else
             echo "send eula"
         fi
         if [[ "$(checkLicense)" == "failed" ]]; then
-            if [ "$bigIqLicenseKey1" == "" ]; then
+            if [ "$bigIqLicenseKey" == "" ]; then
                 licenseRegistration "$licensePayload"
             else
                 echo "check license key"
