@@ -11,7 +11,7 @@ resource "azurerm_network_interface" "bigiq-mgmt-nic" {
     subnet_id                     = var.subnetMgmt.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.bigiqmgmt
-    public_ip_address_id          = azurerm_public_ip.f5vmpip01.id
+    public_ip_address_id          = azurerm_public_ip.bigiqpip.id
   }
 
   tags = {
@@ -35,7 +35,7 @@ resource "azurerm_network_interface" "bigiq-ext-nic" {
     name                          = "primary"
     subnet_id                     = var.subnetDiscovery.id
     private_ip_address_allocation = "Static"
-    private_ip_address            = var.f5vm01ext
+    private_ip_address            = var.bigiqPrivateMgmtIp
     primary			  = true
   }
 
@@ -43,7 +43,7 @@ resource "azurerm_network_interface" "bigiq-ext-nic" {
     name                          = "secondary"
     subnet_id                     = var.subnetDiscovery.id
     private_ip_address_allocation = "Static"
-    private_ip_address            = var.f5vm01ext_sec
+    private_ip_address            = var.bigiqPrivateDiscoveryIp
   }
 
   tags = {
@@ -70,7 +70,7 @@ resource "azurerm_public_ip" "bigiqpip" {
 }
 # Setup Onboarding scripts
 data "template_file" "vm_onboard" {
-  template = "${file("${path.module}/onboard.sh.tpl")}"
+  template = "${file("${path.module}/onboard.sh.tmpl")}"
 
   vars = {
     adminName      	      = var.adminName
