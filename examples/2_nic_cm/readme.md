@@ -3,10 +3,15 @@
 ## variables
 ### bigiq
 adminSourceRange
+
 adminAccountName
+
 adminAccountPassword
+
 sshPublicKey
+
 masterKey 
+
 ### azure
 ARM_CLIENT_ID
 ARM_CLIENT_SECRET

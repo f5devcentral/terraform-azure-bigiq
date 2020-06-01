@@ -1,7 +1,7 @@
 # IQ module examples
 
 
-## Two network interface centeralized manager
+## Two network interface centralized manager
 
 ### 2_nic_cm
 
