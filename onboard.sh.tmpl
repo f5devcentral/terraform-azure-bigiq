@@ -42,7 +42,7 @@ function check_internet_connection {
 echo  "wait for mcpd"
 function waitMcpd () {
 checks=0
-while [[ "$checks" -lt 120 ]]; do 
+while [[ "$checks" -lt 120 ]]; do
     echo "checking mcpd"
     tmsh -a show sys mcp-state field-fmt | grep -q running
    if [ $? == 0 ]; then
@@ -162,7 +162,7 @@ getToken () {
 }
 # set token header for curl
 setToken () {
-    #--header "X-Vault-Token: $VAULT_TOKEN" 
+    #--header "X-Vault-Token: $VAULT_TOKEN"
     token=$(getToken)
     tokenHeader="X-F5-Auth-Token: $token"
     echo "$tokenHeader"
@@ -187,7 +187,7 @@ function waitIq () {
       count=$[$count+1]
       sleep 30
     fi
-    if [ $count == 10 ]; then 
+    if [ $count == 10 ]; then
       echo "failed: $state"
     fi
   done
@@ -221,16 +221,16 @@ licenseRegistration () {
     if [[ "$(checkVersion)" == "7" ]]; then
         curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$1" --url $localHost$mgmt_port$licenseRegistrationUrl
         # after id is set the url changes back to the 6 url
-        curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X PUT --data "$1" --url $localHost$mgmt_port$licenseRegistrationUrl6 
+        curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X PUT --data "$1" --url $localHost$mgmt_port$licenseRegistrationUrl6
     else
         curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X PUT --data "$1" --url $localHost$mgmt_port$licenseRegistrationUrl
     fi
-    
+
 }
 checkLicense () {
     #status=$(curl -sk --header "$(echo "setToken")" --url $localHost$mgmt_port$licenseUrl | jq .status )
     status=$(curl -sk --header "$(setToken)" --url $localHost$mgmt_port$licenseUrl | jq -r .status )
-    case $status in 
+    case $status in
     LICENSING_ACTIVATION_IN_PROGRESS)
         # inprogress
         echo "inprogress"
@@ -269,7 +269,7 @@ eulaPayload7=$(cat -<<EOF
 EOF
 )
 echo "$eulaPayload7"
-else 
+else
 eulaPayload6=$(cat -<<EOF
   {
   "baseRegKey": "${ bigIqLicenseKey }",
@@ -295,19 +295,19 @@ echo "$licenseFilePayload"
 }
 setHostName () {
     if [[ "$(checkVersion)" == "7" ]]; then
-        curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$hostNamePayload" --url $localHost$mgmt_port$hostNameUrl  
+        curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$hostNamePayload" --url $localHost$mgmt_port$hostNameUrl
     else
-        curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X PATCH --data "$hostNamePayload" --url $localHost$mgmt_port$hostNameUrl  
+        curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X PATCH --data "$hostNamePayload" --url $localHost$mgmt_port$hostNameUrl
     fi
 }
 setMasterKey () {
-  curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$masterKeyPayload" --url $localHost$mgmt_port$masterKeyUrl   
+  curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$masterKeyPayload" --url $localHost$mgmt_port$masterKeyUrl
 }
 createDiscoveryVlan () {
- curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$vlanPayload" --url $localHost$mgmt_port$vlanUrl 
+ curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$vlanPayload" --url $localHost$mgmt_port$vlanUrl
 }
 createDiscoverySelfIp () {
- curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$selfIpPayload" --url $localHost$mgmt_port$selfIpUrl 
+ curl -sk --header "Content-Type:application/json" --header "$(setToken)" -X POST --data "$selfIpPayload" --url $localHost$mgmt_port$selfIpUrl
 }
 setDiscoveryAddress () {
      if [[ "$(checkVersion)" == "7" ]]; then
@@ -348,7 +348,7 @@ function RestCall () {
   do
     # status=$(curl -s -k -u $CREDS $systemInfoUrl | jq .)
     status=$( curl -sk -u $CREDS https://localhost:$mgmt_port/info/system | jq .)
-    case $status in 
+    case $status in
         FINISHED)
             # finished
             echo " rpm: $filename task: $install status: $status"
@@ -552,7 +552,7 @@ EOF
 #
 #
 # end payloads
-# 
+#
 # begin setup
 #
 # wait for mcpd
@@ -583,7 +583,7 @@ else
     echo "failed IQ status not ready"
     exit
 fi
-# 
+#
 # check bigiq version
 #
 echo "check bigiq version"

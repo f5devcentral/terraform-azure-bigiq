@@ -1,5 +1,5 @@
 # attach interfaces
-# Create the first network interface card for Management 
+# Create the first network interface card for Management
 resource "azurerm_network_interface" "bigiq-mgmt-nic" {
   name                      = "${var.prefix}bigiq-mgmt-nic${var.buildSuffix}"
   location                  = var.resourceGroup.location

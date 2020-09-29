@@ -12,4 +12,3 @@
     //A command string or list of command arguments to run after the environment is created. Use && in a string to execute multiple commands.
     "postCreateCommand": "/bin/bash ./.devcontainer/scripts/tools.sh >> ~/post-create-tools.log"
   }
-  

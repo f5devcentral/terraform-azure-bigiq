@@ -7,6 +7,4 @@
 
 ## Two network interface license manager
 
-### 2_nic_lm 
-
-
+### 2_nic_lm
