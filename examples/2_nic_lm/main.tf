@@ -3,32 +3,32 @@
 module "bigiq" {
   source = "github.com/vinnie357/terraform-azure-bigiq?ref=master"
   # setup
-  prefix = var.projectPrefix
-  buildSuffix = "-${random_pet.buildSuffix.id}"
+  prefix        = var.projectPrefix
+  buildSuffix   = "-${random_pet.buildSuffix.id}"
   resourceGroup = azurerm_resource_group.main
-  instanceType = var.instanceType
+  instanceType  = var.instanceType
   # bigiq
-  imageName = var.imageName
-  bigiqVersion = var.bigiqVersion
-  hostName = var.host1Name
-  dnsServers = var.dnsServers
-  ntpServers = var.ntpServers
+  imageName        = var.imageName
+  bigiqVersion     = var.bigiqVersion
+  hostName         = var.host1Name
+  dnsServers       = var.dnsServers
+  ntpServers       = var.ntpServers
   dnsSearchDomains = var.dnsSearchDomains
-  masterKey = var.masterKey
-  timeZone = var.timeZone
-  diskType = var.diskType
+  masterKey        = var.masterKey
+  timeZone         = var.timeZone
+  diskType         = var.diskType
   # admin
   adminSourceRange = var.adminSourceRange
-  adminPassword      = var.adminAccountPassword
+  adminPassword    = var.adminAccountPassword
   adminName        = var.adminAccountName
-  bigIqLicenseKey = var.bigIqLicenseKey
-  sshPublicKey = var.sshPublicKey
+  bigIqLicenseKey  = var.bigIqLicenseKey
+  sshPublicKey     = var.sshPublicKey
   #networks
-  subnetMgmt = azurerm_subnet.mgmt
-  subnetDiscovery = azurerm_subnet.discovery
+  subnetMgmt                  = azurerm_subnet.mgmt
+  subnetDiscovery             = azurerm_subnet.discovery
   bigiqPrivateDiscoveryIpCidr = var.bigiqPrivateDiscoveryIpCidr
-  cidr = var.cidr
-  bigiqPrivateMgmtIp = var.bigiqPrivateMgmtIp
-  bigiqPrivateDiscoveryIp = var.bigiqPrivateDiscoveryIp
-  networkSecurityGroup = azurerm_network_security_group.main
+  cidr                        = var.cidr
+  bigiqPrivateMgmtIp          = var.bigiqPrivateMgmtIp
+  bigiqPrivateDiscoveryIp     = var.bigiqPrivateDiscoveryIp
+  networkSecurityGroup        = azurerm_network_security_group.main
 }

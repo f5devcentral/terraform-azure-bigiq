@@ -15,20 +15,20 @@ resource "azurerm_network_interface" "bigiq-mgmt-nic" {
   }
 
   tags = {
-    Name           = "${var.environment}-bigiq-mgmt-int"
-    environment    = var.environment
-    owner          = var.owner
-    group          = var.group
-    costcenter     = var.costcenter
-    application    = var.application
+    Name        = "${var.environment}-bigiq-mgmt-int"
+    environment = var.environment
+    owner       = var.owner
+    group       = var.group
+    costcenter  = var.costcenter
+    application = var.application
   }
 }
 # Create the second network interface card for discovery
 resource "azurerm_network_interface" "bigiq-discovery-nic" {
-  name                = "${var.prefix}bigiq-discovery-nic${var.buildSuffix}"
-  location            = var.resourceGroup.location
-  resource_group_name = var.resourceGroup.name
-  network_security_group_id = var.networkSecurityGroup.id
+  name                          = "${var.prefix}bigiq-discovery-nic${var.buildSuffix}"
+  location                      = var.resourceGroup.location
+  resource_group_name           = var.resourceGroup.name
+  network_security_group_id     = var.networkSecurityGroup.id
   enable_accelerated_networking = true
 
   ip_configuration {
@@ -36,17 +36,17 @@ resource "azurerm_network_interface" "bigiq-discovery-nic" {
     subnet_id                     = var.subnetDiscovery.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.bigiqPrivateDiscoveryIp
-    primary			  = true
+    primary                       = true
   }
 
   tags = {
-    Name           = "${var.environment}-bigiq-discovery-int"
-    environment    = var.environment
-    owner          = var.owner
-    group          = var.group
-    costcenter     = var.costcenter
-    application    = var.application
-    f5_cloud_failover_label = "bigiq"
+    Name                      = "${var.environment}-bigiq-discovery-int"
+    environment               = var.environment
+    owner                     = var.owner
+    group                     = var.group
+    costcenter                = var.costcenter
+    application               = var.application
+    f5_cloud_failover_label   = "bigiq"
     f5_cloud_failover_nic_map = "discovery"
   }
 }
@@ -66,25 +66,25 @@ data "template_file" "vm_onboard" {
   template = "${file("${path.module}/onboard.sh.tmpl")}"
 
   vars = {
-    adminName      	      = var.adminName
-    adminPassword         = var.adminPassword
-    onboardLog		      = var.onboardLog
-    bigIqLicenseKey      = var.bigIqLicenseKey
+    adminName              = var.adminName
+    adminPassword          = var.adminPassword
+    onboardLog             = var.onboardLog
+    bigIqLicenseKey        = var.bigIqLicenseKey
     ntpServers             = var.ntpServers
-    timeZone              = var.timeZone
-    licensePoolKeys       = var.licensePoolKeys
-    regPoolKeys           = var.regPoolKeys
-    masterKey             = var.masterKey
-    f5CloudLibsTag        = var.f5CloudLibsTag
-    f5CloudLibsAzureTag   = var.f5CloudLibsAzureTag
-    allowUsageAnalytics   = var.allowUsageAnalytics
-    location              = var.location
-    deploymentId          =  var.deploymentId
-    hostName           =  "${var.hostName}.${var.dnsSearchDomains}"
+    timeZone               = var.timeZone
+    licensePoolKeys        = var.licensePoolKeys
+    regPoolKeys            = var.regPoolKeys
+    masterKey              = var.masterKey
+    f5CloudLibsTag         = var.f5CloudLibsTag
+    f5CloudLibsAzureTag    = var.f5CloudLibsAzureTag
+    allowUsageAnalytics    = var.allowUsageAnalytics
+    location               = var.location
+    deploymentId           = var.deploymentId
+    hostName               = "${var.hostName}.${var.dnsSearchDomains}"
     discoveryAddressSelfip = "${var.bigiqPrivateDiscoveryIp}/${var.bigiqPrivateDiscoveryIpCidr}"
-    discoveryAddress      = var.bigiqPrivateDiscoveryIp
+    discoveryAddress       = var.bigiqPrivateDiscoveryIp
     dnsSearchDomains       = var.dnsSearchDomains
-    dnsServers              = var.dnsServers
+    dnsServers             = var.dnsServers
   }
 }
 
@@ -96,13 +96,13 @@ resource "azurerm_virtual_machine" "bigiq" {
   primary_network_interface_id = azurerm_network_interface.bigiq-mgmt-nic.id
   network_interface_ids        = [azurerm_network_interface.bigiq-mgmt-nic.id, azurerm_network_interface.bigiq-discovery-nic.id]
   vm_size                      = var.instanceType
-  
+
   # Uncomment this line to delete the OS disk automatically when deleting the VM
-   delete_os_disk_on_termination = true
+  delete_os_disk_on_termination = true
 
 
   # Uncomment this line to delete the data disks automatically when deleting the VM
-   delete_data_disks_on_termination = true
+  delete_data_disks_on_termination = true
 
   storage_image_reference {
     publisher = "f5-networks"
@@ -128,25 +128,25 @@ resource "azurerm_virtual_machine" "bigiq" {
   os_profile_linux_config {
     disable_password_authentication = false
     ssh_keys {
-        #NOTE: Due to a limitation in the Azure VM Agent the only allowed path is /home/{username}/.ssh/authorized_keys.
-        path  = "/home/${var.adminName}/.ssh/authorized_keys"
-        key_data = var.sshPublicKey
+      #NOTE: Due to a limitation in the Azure VM Agent the only allowed path is /home/{username}/.ssh/authorized_keys.
+      path     = "/home/${var.adminName}/.ssh/authorized_keys"
+      key_data = var.sshPublicKey
     }
   }
 
   plan {
-    name          = var.imageName
-    publisher     = "f5-networks"
-    product       = var.product
+    name      = var.imageName
+    publisher = "f5-networks"
+    product   = var.product
   }
 
   tags = {
-    Name           = "${var.environment}-bigiq"
-    environment    = var.environment
-    owner          = var.owner
-    group          = var.group
-    costcenter     = var.costcenter
-    application    = var.application
+    Name        = "${var.environment}-bigiq"
+    environment = var.environment
+    owner       = var.owner
+    group       = var.group
+    costcenter  = var.costcenter
+    application = var.application
   }
 
 }
@@ -169,17 +169,17 @@ resource "azurerm_virtual_machine_extension" "bigiq-run-startup-cmd" {
   SETTINGS
 
   tags = {
-    Name           = "${var.environment}-bigiq-startup-cmd"
-    environment    = var.environment
-    owner          = var.owner
-    group          = var.group
-    costcenter     = var.costcenter
-    application    = var.application
+    Name        = "${var.environment}-bigiq-startup-cmd"
+    environment = var.environment
+    owner       = var.owner
+    group       = var.group
+    costcenter  = var.costcenter
+    application = var.application
   }
 }
 
 data "azurerm_public_ip" "managementPublicAddress" {
-    name               = azurerm_public_ip.bigiqpip.name
-    resource_group_name = var.resourceGroup.name
-    depends_on          = [azurerm_virtual_machine_extension.bigiq-run-startup-cmd]
+  name                = azurerm_public_ip.bigiqpip.name
+  resource_group_name = var.resourceGroup.name
+  depends_on          = [azurerm_virtual_machine_extension.bigiq-run-startup-cmd]
 }

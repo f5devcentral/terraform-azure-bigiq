@@ -1,6 +1,6 @@
 variable "bigIqLicenseKey" {
   description = "big-iq-key-key-key-byol"
-  default = ""
+  default     = ""
 }
 variable "adminAccountName" {
   description = "BIG-IQ admin account name ex: xadmin"
@@ -11,21 +11,21 @@ variable "adminAccountPassword" {
 }
 
 variable "adminSourceRange" {
-    description = "network or address with CIDR where admin traffic will source from ex: 192.168.2.0/24"
-  
+  description = "network or address with CIDR where admin traffic will source from ex: 192.168.2.0/24"
+
 }
 
 variable "projectPrefix" {
   description = "resource prefix"
-  default = "mybigiq-"
+  default     = "mybigiq-"
 }
 
 #######
 
 # Azure Environment
-variable prefix { 
-    description = "resource prefix"
-    default = "bigiq-" 
+variable prefix {
+  description = "resource prefix"
+  default     = "bigiq-"
 }
 variable location { default = "eastus2" }
 variable region { default = "East US 2" }
@@ -43,7 +43,7 @@ variable "subnets" {
 }
 variable bigiqPrivateMgmtIp { default = "10.90.1.4" }
 variable bigiqPrivateDiscoveryIp { default = "10.90.2.4" }
-variable bigiqPrivateDiscoveryIpCidr { default ="24" }
+variable bigiqPrivateDiscoveryIpCidr { default = "24" }
 
 # BIGIQ Image
 variable instanceType { default = "Standard_D4s_v3" }
@@ -63,33 +63,33 @@ variable timezone { default = "UTC" }
 variable onboard_log { default = "/var/log/startup-script.log" }
 #
 variable "deploymentId" {
-    default= "bigiq-test"
-  
+  default = "bigiq-test"
+
 }
 variable "allowUsageAnalytics" {
-    default= false
-  
+  default = false
+
 }
-variable intSubnetPrivateAddress { default = "10.90.3.4"}
+variable intSubnetPrivateAddress { default = "10.90.3.4" }
 variable "f5CloudLibsAzureTag" {
-  description="release from f5-cloud-libs https://github.com/F5Networks/f5-cloud-libs-azure/releases"
-  default="v2.12.0"
+  description = "release from f5-cloud-libs https://github.com/F5Networks/f5-cloud-libs-azure/releases"
+  default     = "v2.12.0"
 }
 variable "f5CloudLibsTag" {
-  description="release from f5-cloud-libs https://github.com/F5Networks/f5-cloud-libs/releases"
-  default="v4.15.0"
+  description = "release from f5-cloud-libs https://github.com/F5Networks/f5-cloud-libs/releases"
+  default     = "v4.15.0"
 }
 variable "masterKey" {
   description = "master key for bigiq setup"
 }
 variable "regPoolKeys" {
-  default= "key-key-key-key"
+  default = "key-key-key-key"
 }
 variable "licensePoolKeys" {
-  default= "pool-key-key-key"
+  default = "pool-key-key-key"
 }
 variable "sshPublicKey" {
-    description = "contents of ssh public key for instance access"
+  description = "contents of ssh public key for instance access"
 }
 variable timeZone { default = "UTC" }
 

@@ -4,7 +4,7 @@ resource "azurerm_network_security_group" "main" {
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   # https://support.f5.com/csp/article/K15612
-security_rule {
+  security_rule {
     name                       = "allow_admin_SSH"
     description                = "Allow SSH access"
     priority                   = 100
@@ -147,11 +147,11 @@ security_rule {
   }
 
   tags = {
-    Name           = "${var.environment}-bigiq-sg"
-    environment    = var.environment
-    owner          = var.owner
-    group          = var.group
-    costcenter     = var.costcenter
-    application    = var.application
+    Name        = "${var.environment}-bigiq-sg"
+    environment = var.environment
+    owner       = var.owner
+    group       = var.group
+    costcenter  = var.costcenter
+    application = var.application
   }
 }
