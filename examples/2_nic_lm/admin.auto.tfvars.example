@@ -1,0 +1,7 @@
+# admin
+adminAccountName     = "xadmin"
+adminAccountPassword = "Pleaseusevault123!"
+# '^(?=.*[A-Z]+)(?=.*[0-9]+)(?=.*[a-z]+)(?=.*[^a-zA-Z0-9 ]+)'
+masterKey        = "Pleaseusevault123!Pleaseusevault123!"
+adminSourceRange = ["192.168.2.11/32"]
+sshPublicKey     = "ssh-rsa AAAA..."
