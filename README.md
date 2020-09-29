@@ -11,7 +11,7 @@
 
 | Name | Version |
 |------|---------|
-| terraform | = 0.12.25 |
+| terraform | ~> 0.12 |
 
 ## Providers
 

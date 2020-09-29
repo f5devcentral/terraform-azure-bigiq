@@ -1,0 +1,33 @@
+# project specific
+admin.auto.tfvars
+
+# Ignore direnv setup
+.envrc
+.direnv
+
+# Ignore Terraform plugin/module cache and local state files
+# Local .terraform directories
+.terraform
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+*.tfstate
+*.tfstate.backup
+
+# Crash log files
+crash.log
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Don't include any local automatic variable assignment files
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
