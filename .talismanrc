@@ -1,0 +1,5 @@
+fileignoreconfig:
+- filename: examples/2_nic_cm/admin.auto.tfvars.example
+  checksum: 3c0fe842eb248b1b8f2396d115c2506cabf7c7d562b2c373e7df6fcfeffa68bc
+- filename: examples/2_nic_lm/admin.auto.tfvars.example
+  checksum: cdcfefe2e50072f914d2fe278a6d68e67dd6d0c5a44c825b0e31f5ead7a35623
